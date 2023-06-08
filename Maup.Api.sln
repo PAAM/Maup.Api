@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maup.Api", "Maup.Api\Maup.Api.csproj", "{BEB44635-7549-45D8-AB52-4D60D92DC9D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maup.Core", "Maup.Core\Maup.Core.csproj", "{02DD4CA3-18E8-4EAF-A9FA-F470761E4CFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Maup.Tests", "Maup.Tests", "{9787A0A2-1FA3-48C6-9227-F373E7C37DB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maup.UnitTest", "Maup.UnitTest\Maup.UnitTest.csproj", "{1575934B-3EF2-467E-973F-59593BDE3250}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maup.IntegrationTests", "Maup.IntegrationTests\Maup.IntegrationTests.csproj", "{2F1C38CF-3937-414B-B03B-DDE166EB2B28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maup.Infrastructure", "Maup.Infrastructure\Maup.Infrastructure.csproj", "{F17672BC-D9DA-44EA-838B-0390AB85A391}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEB44635-7549-45D8-AB52-4D60D92DC9D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB44635-7549-45D8-AB52-4D60D92DC9D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB44635-7549-45D8-AB52-4D60D92DC9D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB44635-7549-45D8-AB52-4D60D92DC9D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02DD4CA3-18E8-4EAF-A9FA-F470761E4CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02DD4CA3-18E8-4EAF-A9FA-F470761E4CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02DD4CA3-18E8-4EAF-A9FA-F470761E4CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02DD4CA3-18E8-4EAF-A9FA-F470761E4CFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1575934B-3EF2-467E-973F-59593BDE3250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1575934B-3EF2-467E-973F-59593BDE3250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1575934B-3EF2-467E-973F-59593BDE3250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1575934B-3EF2-467E-973F-59593BDE3250}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F1C38CF-3937-414B-B03B-DDE166EB2B28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F1C38CF-3937-414B-B03B-DDE166EB2B28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F1C38CF-3937-414B-B03B-DDE166EB2B28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F1C38CF-3937-414B-B03B-DDE166EB2B28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F17672BC-D9DA-44EA-838B-0390AB85A391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F17672BC-D9DA-44EA-838B-0390AB85A391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F17672BC-D9DA-44EA-838B-0390AB85A391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F17672BC-D9DA-44EA-838B-0390AB85A391}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1575934B-3EF2-467E-973F-59593BDE3250} = {9787A0A2-1FA3-48C6-9227-F373E7C37DB3}
+		{2F1C38CF-3937-414B-B03B-DDE166EB2B28} = {9787A0A2-1FA3-48C6-9227-F373E7C37DB3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2BF2B00D-100A-4800-9790-4720DCC5E65A}
+	EndGlobalSection
+EndGlobal
