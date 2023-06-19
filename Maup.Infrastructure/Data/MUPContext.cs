@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Maup.Core.Entities;
+﻿using Maup.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Maup.Infrastructure.Data
 {
@@ -22,23 +19,16 @@ namespace Maup.Infrastructure.Data
         public virtual DbSet<PropertyImage> PropertyImages { get; set; } = null!;
         public virtual DbSet<PropertyTrace> PropertyTraces { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=tcp:hera01.database.windows.net,1433;Initial Catalog=MUP;Persist Security Info=False;User ID=Hera01;Password=Bogota#0523;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Owner>(entity =>
             {
-                entity.HasKey(e => e.IdOwner)
-                    .HasName("PK__Owner__D32618165568DE0C");
-
                 entity.ToTable("Owner");
+
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                .HasColumnName("IdOwner");
+
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(255)
@@ -55,10 +45,11 @@ namespace Maup.Infrastructure.Data
 
             modelBuilder.Entity<Property>(entity =>
             {
-                entity.HasKey(e => e.IdProperty)
-                    .HasName("PK__Property__842B6AA7F7DD3A50");
-
                 entity.ToTable("Property");
+
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                .HasColumnName("IdProperty");
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(255)
@@ -81,10 +72,12 @@ namespace Maup.Infrastructure.Data
 
             modelBuilder.Entity<PropertyImage>(entity =>
             {
-                entity.HasKey(e => e.IdPropertyImage)
-                    .HasName("PK__Property__018BACD5519D0216");
-
                 entity.ToTable("PropertyImage");
+
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                .HasColumnName("PropertyImage");
+
 
                 entity.Property(e => e.File).HasColumnType("image");
 
@@ -97,10 +90,11 @@ namespace Maup.Infrastructure.Data
 
             modelBuilder.Entity<PropertyTrace>(entity =>
             {
-                entity.HasKey(e => e.IdPropertyTrace)
-                    .HasName("PK__Property__373407C90CDF2023");
-
                 entity.ToTable("PropertyTrace");
+
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                .HasColumnName("IdPropertyTrace");
 
                 entity.Property(e => e.DateSale).HasColumnType("datetime");
 

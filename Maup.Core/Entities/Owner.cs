@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 namespace Maup.Core.Entities
 {
-    public partial class Owner
+    public partial class Owner: BaseEntity
     {
         public Owner()
         {
             Properties = new HashSet<Property>();
         }
 
-        public int IdOwner { get; set; }
         public string Name { get; set; } = null!;
         public string? Address { get; set; }
         public byte[]? Photo { get; set; }

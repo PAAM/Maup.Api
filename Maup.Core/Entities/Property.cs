@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Maup.Core.Entities
 {
-    public partial class Property
+    public partial class Property : BaseEntity
     {
         public Property()
         {
@@ -11,7 +11,6 @@ namespace Maup.Core.Entities
             PropertyTraces = new HashSet<PropertyTrace>();
         }
 
-        public int IdProperty { get; set; }
         public string Name { get; set; } = null!;
         public string? Address { get; set; }
         public decimal Price { get; set; }

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace Maup.Core.Entities
 {
-    public partial class PropertyTrace
+    public partial class PropertyTrace : BaseEntity
     {
-        public int IdPropertyTrace { get; set; }
         public DateTime DateSale { get; set; }
         public string Name { get; set; } = null!;
         public decimal Value { get; set; }
