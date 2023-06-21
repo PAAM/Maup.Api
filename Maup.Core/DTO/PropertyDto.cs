@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Maup.Core.DTO
 {
+
     public class PropertyDto
     {
         public int Id { get; set; }

@@ -13,13 +13,16 @@ namespace Maup.Infrastructure.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly MUPContext _context;
-        private readonly IRepository<Property> _repository;
+        private readonly IRepository<Property> _propertyRepository;
+        private readonly IRepository<PropertyImage> _propertyImageRepository;
         public UnitOfWork(MUPContext context)
         {
             _context = context;
         }
 
-        public IRepository<Property> PropertyRepository => _repository ?? new Repository<Property>(_context);
+        public IRepository<Property> PropertyRepository => _propertyRepository ?? new Repository<Property>(_context);
+
+        public IRepository<PropertyImage> PropertyImageRepository => _propertyImageRepository ?? new Repository<PropertyImage>(_context);
 
         public void Dispose()
         {

@@ -23,8 +23,8 @@ namespace Maup.Core.Services
 
         public async Task CreateProperty(Property property)
         {
-
             await _unitOfWork.PropertyRepository.Add(property);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public PageList<Property> GetPropertiesAsync(PropertyFilter filter)

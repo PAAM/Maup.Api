@@ -17,7 +17,6 @@ namespace Maup.Api.Controllers
     [ApiController]
     public class PropertyController : ControllerBase
     {
-        #region Dependency Injection
 
         private readonly IMapper _mapper;
         private readonly IPropertyService _propertyService;
@@ -29,13 +28,10 @@ namespace Maup.Api.Controllers
 
         }
 
-        #endregion
-
-
         [HttpPost]
         [SwaggerOperation(
             Summary = "[Summary]: Insert a new Property",
-            Description = "[Description]: This End-Point will create a new Property, just you need to build a request with the correct parameters.",
+            Description = "[Description]: This End-Point will create a new Property, just you need to build a request with the correct parameters.</br><b>The Request does not require the ID parameter</b>",
             OperationId = "CreateProperty"
             )]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(ApiResponse<PropertyDto>))]

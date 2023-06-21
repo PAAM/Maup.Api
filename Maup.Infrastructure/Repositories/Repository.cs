@@ -21,6 +21,11 @@ namespace Maup.Infrastructure.Repositories
             _entities = context.Set<T>();
         }
 
+        public async Task Add(T entity)
+        {
+            await _entities.AddAsync(entity);
+        }
+
         public IEnumerable<T> GetAll()
         {
             return _entities.AsEnumerable();
@@ -30,10 +35,7 @@ namespace Maup.Infrastructure.Repositories
         {
             return await _entities.FindAsync(id);
         }
-        public async Task Add(T entity)
-        {
-            await _entities.AddAsync(entity);
-        }
+        
 
         public void Update(T entity)
         {

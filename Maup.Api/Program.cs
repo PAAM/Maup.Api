@@ -1,14 +1,17 @@
 using AutoMapper;
+using FluentAssertions.Common;
 using Maup.Core.Entities;
 using Maup.Core.Interfaces;
 using Maup.Core.Services;
 using Maup.Infrastructure.Data;
 using Maup.Infrastructure.Filters;
 using Maup.Infrastructure.Repositories;
+using Maup.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,7 +45,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Authentication:Issuer"],
         ValidAudience = builder.Configuration["Authentication:Audience"],
-        IssuerSigningKey =  new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Authentication:Secret"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Authentication:Secret"]))
     };
 });
 
@@ -68,6 +71,9 @@ builder.Services.AddDbContext<MUPContext>(options => options.UseSqlServer(builde
 
 //Service Register
 builder.Services.AddTransient<IPropertyService, PropertyService>();
+builder.Services.AddTransient<IPropertyImageService, PropertyImageService>();
+builder.Services.AddTransient<IFileStore, FileStoreService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.Configure<Pagination>(builder.Configuration.GetSection("Pagination"));
@@ -84,6 +90,10 @@ builder.Services.AddSwaggerGen(x =>
         Version = "v1",
         Description = "<b>Introduction:</b>\r\nMAUP Api provides a set of endpoints to manage real estate listings and related information. This API is designed to facilitate common operations in the real estate business, allowing users to create, retrieve, update, and delete real estate listings.\r\n\r\n<b>Authentication:</b>\r\nThe API requires authentication using API key-based authentication. To access the endpoints, you need to include your API key in the request headers."
     });
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    x.IncludeXmlComments(xmlPath);
 });
 
 
@@ -97,6 +107,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 
 app.UseAuthentication();

@@ -11,6 +11,8 @@ namespace Maup.Core.Interfaces
     {
         IRepository<Property> PropertyRepository { get; }
 
+        IRepository<PropertyImage> PropertyImageRepository { get; }
+
         void SaveChanges();
 
         Task SaveChangesAsync();

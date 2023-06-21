@@ -76,16 +76,17 @@ namespace Maup.Infrastructure.Data
 
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id)
-                .HasColumnName("PropertyImage");
+                .HasColumnName("IdPropertyImage");
 
-
-                entity.Property(e => e.File).HasColumnType("image");
+                entity.Property(e => e.File)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.IdPropertyNavigation)
                     .WithMany(p => p.PropertyImages)
                     .HasForeignKey(d => d.IdProperty)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PropertyI__IdPro__6477ECF3");
+                    .HasConstraintName("FK__PropertyI__IdPro__693CA210");
             });
 
             modelBuilder.Entity<PropertyTrace>(entity =>

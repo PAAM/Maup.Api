@@ -26,4 +26,8 @@
 		<ProjectReference Include="..\Maup.Infrastructure\Maup.Infrastructure.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\" />
+	</ItemGroup>
+
 </Project>
