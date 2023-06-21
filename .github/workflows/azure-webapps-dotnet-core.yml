@@ -78,12 +78,13 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-      
-      - name: Login via Az module
+             
+      - name: Login to Azure
         uses: azure/actions/login@v1
+        env:
+          CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
         with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
-          enable-AzPSSession: true     
+          creds: $CREDENTIALS
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
