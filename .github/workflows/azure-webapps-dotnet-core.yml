@@ -82,7 +82,7 @@ jobs:
       - name: Login via Az module
         uses: azure/login@v1
         with:
-          creds: ${{secrets.AZURE_DEPLOY}}
+          creds: ${{secrets.AZURE_CREDENTIALS}}
           enable-AzPSSession: true     
 
       - name: Deploy to Azure Web App
