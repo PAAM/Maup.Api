@@ -23,8 +23,7 @@ env:
   AZURE_WEBAPP_NAME: maup    # set this to the name of your Azure Web App
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '6.0'                 # set this to the .NET Core version to use
-  CREDENTIALS: '{"clientId":"985a3303-981f-475f-898a-70449fd364ae","clientSecret": "FEF8Q~tChnALBtYmOeSXY~lud0bHCnzR-fLOWb--","subscriptionId":"a600ecd9-66c8-4a3f-a497-49a6f0a92952","tenantId": "1199a865-e48b-4bc3-b06e-d9f0c8b87f1a",}'
-   
+  CREDENTIALS: '{"AZURE_TENANT_ID" : "1199a865-e48b-4bc3-b06e-d9f0c8b87f1a","AZURE_CLIENT_ID" : "985a3303-981f-475f-898a-70449fd364ae","AZURE_USERNAME" : "maup-webapi","AZURE_PASSWORD" : "FEF8Q~tChnALBtYmOeSXY~lud0bHCnzR-fLOWb--"'   
 on:
   push:
     branches: [ "master" ]
