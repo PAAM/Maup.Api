@@ -84,7 +84,7 @@ jobs:
         env:
           CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
         with:
-          creds: $CREDENTIALS
+          creds: ${{ env.CREDENTIALS }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
