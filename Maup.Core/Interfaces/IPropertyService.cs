@@ -1,5 +1,6 @@
 ﻿using Maup.Core.Entities;
 using Maup.Core.Filters;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,6 @@ namespace Maup.Core.Interfaces
         PageList<Property> GetPropertiesAsync(PropertyFilter filter);
         Task<Property> GetProperty(int IdProperty);
         Task<bool> UpdateProperty(Property property);
-        Task<bool> UpdatePropertyPrice(Property property);
+        Task<bool> UpdatePropertyPrice(int idProperty, JsonPatchDocument property);
     }
 }

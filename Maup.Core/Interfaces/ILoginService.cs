@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace Maup.Core.Interfaces
 {
-    public interface IRepository<T> where T : BaseEntity
+    public interface ILoginService
     {
-        Task Add(T entity);
-        IEnumerable<T> GetAll();
-        Task<T> GetById(int id);
-        void Update(T entity);
-
+        Task<string> IsValidLogin(Login login);
     }
 }

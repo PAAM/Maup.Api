@@ -11,7 +11,7 @@ namespace Maup.Core.DTO
     {
         public int Id { get; set; }
         public int IdProperty { get; set; }
-        public IFormFile File { get; set; }
+        public IFormFile? File { get; set; }
         public bool? Enabled { get; set; }
     }
 }

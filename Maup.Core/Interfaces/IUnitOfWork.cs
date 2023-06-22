@@ -1,9 +1,5 @@
 ﻿using Maup.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Maup.Core.Repositories;
 
 namespace Maup.Core.Interfaces
 {
@@ -12,6 +8,8 @@ namespace Maup.Core.Interfaces
         IRepository<Property> PropertyRepository { get; }
 
         IRepository<PropertyImage> PropertyImageRepository { get; }
+
+        IOwnerRepository OwnerRepository { get; }
 
         void SaveChanges();
 

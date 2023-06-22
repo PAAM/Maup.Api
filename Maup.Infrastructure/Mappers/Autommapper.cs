@@ -13,13 +13,20 @@ namespace Maup.Infrastructure.Mappers
     {
         public Autommapper()
         {
-            CreateMap<Property, PropertyDto>().ReverseMap();
-            //CreateMap<PropertyDto, Property>();
+            CreateMap<Property, PropertyDto>();
+            CreateMap<PropertyDto, Property>();
 
-            CreateMap<PropertyImage, PropertyImageDto>();
+            CreateMap<PropertyImage, PropertyImageDto>()
+            .ForMember(i => i.File, options => options.Ignore());
+            CreateMap<PropertyImageDto, PropertyImage>();
 
-            CreateMap<PropertyImageDto, PropertyImage>()
-                .ForMember(i => i.File, options => options.Ignore());
+            CreateMap<Owner, OwnerDto>()
+                .ForMember(i => i.Photo, options => options.Ignore());
+            CreateMap<OwnerDto, Owner>()
+                .ForMember(i => i.Photo, options => options.Ignore());
+
+          
+
         }
     }
 }

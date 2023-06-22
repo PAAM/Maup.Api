@@ -29,18 +29,31 @@ namespace Maup.Infrastructure.Data
                 entity.Property(e => e.Id)
                 .HasColumnName("IdOwner");
 
+                entity.Property(e => e.Name)
+                   .HasMaxLength(255)
+                   .IsUnicode(false);
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Photo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+                
                 entity.Property(e => e.Birthday).HasColumnType("date");
 
-                entity.Property(e => e.Name)
-                    .HasMaxLength(255)
+                entity.Property(e => e.User)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Photo).HasColumnType("image");
+                entity.Property(e => e.Password)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Rol).HasColumnName("Rol");
+                entity.Property(e => e.Enabled).HasColumnName("Enabled");
+
             });
 
             modelBuilder.Entity<Property>(entity =>

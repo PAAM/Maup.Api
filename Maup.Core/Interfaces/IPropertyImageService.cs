@@ -14,7 +14,7 @@ namespace Maup.Core.Interfaces
     {
         Task<PropertyImage> InsertNewPropertyImage(PropertyImage propertyImage, IFormFile formFile);
 
-        //PageList<PropertyImage> GetPropertiesAsync(PropertyFilter filter);
+        PageList<PropertyImage> GetPropertiesAsync(PropertyImageFilter filter);
 
     }
 }

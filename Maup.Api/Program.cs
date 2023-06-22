@@ -2,6 +2,7 @@ using AutoMapper;
 using FluentAssertions.Common;
 using Maup.Core.Entities;
 using Maup.Core.Interfaces;
+using Maup.Core.Repositories;
 using Maup.Core.Services;
 using Maup.Infrastructure.Data;
 using Maup.Infrastructure.Filters;
@@ -70,12 +71,15 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddDbContext<MUPContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MUP")));
 
 //Service Register
-builder.Services.AddTransient<IPropertyService, PropertyService>();
-builder.Services.AddTransient<IPropertyImageService, PropertyImageService>();
 builder.Services.AddTransient<IFileStore, FileStoreService>();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<ILoginService, LoginService>();
+builder.Services.AddTransient<IOwnerRepository, OwnerRepository>();
+builder.Services.AddTransient<IPropertyImageService, PropertyImageService>();
+builder.Services.AddTransient<IPropertyService, PropertyService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.Configure<Pagination>(builder.Configuration.GetSection("Pagination"));
 
 

@@ -5,11 +5,13 @@ using Maup.Core.Entities;
 using Maup.Core.Filters;
 using Maup.Core.Interfaces;
 using Maup.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Maup.Api.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -34,35 +36,40 @@ namespace Maup.Api.Controllers
         public async Task<IActionResult> NewPropertyImage([FromForm] PropertyImageDto propertyImageDto)
         {
             var property = _mapper.Map<PropertyImage>(propertyImageDto);
-            property = await _propertyImageService.InsertNewPropertyImage(property, propertyImageDto.File);
-            var response = new ApiResponse<PropertyImage>(property);
+            await _propertyImageService.InsertNewPropertyImage(property, propertyImageDto.File);
+            propertyImageDto = _mapper.Map<PropertyImageDto>(property);
+            var response = new ApiResponse<PropertyImageDto>(propertyImageDto);
             return Ok(response);
         }
 
 
-        //[HttpGet]
-        //public IActionResult GetPropertyImages([FromQuery] PropertyFilter filter)
-        //{
-        //    var properties = _propertyImageService.GetPropertiesAsync(filter);
-        //    var propertyDto = _mapper.Map<IEnumerable<PropertyDto>>(properties);
-        //    var response = new ApiResponse<IEnumerable<PropertyDto>>(propertyDto);
+        [HttpGet]
+        [HttpGet]
+        [SwaggerOperation(
+            Summary = "[Summary]: List of images from properties",
+            Description = "[Description]: This End-Point returns a list with all images on the DataBase.",
+            OperationId = "GetPropertyImages"
+            )]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(ApiResponse<IEnumerable<PropertyImageDto>>))]
+        public IActionResult GetPropertyImages([FromQuery] PropertyImageFilter filter)
+        {
+            var properties = _propertyImageService.GetPropertiesAsync(filter);
+            var response = new ApiResponse<IEnumerable<PropertyImage>>(properties);
 
-        //    var metadata = new Metadata
-        //    {
-        //        PageIndex = properties.PageIndex,
-        //        TotalPages = properties.TotalPages,
-        //        PageSize = properties.PageSize,
-        //        TotalRows = properties.TotalRows,
-        //        HasPreviousPage = properties.HasPreviousPage,
-        //        HasNextPage = properties.HasNextPage,
-        //        NextPageNumber = properties.NextPageNumber,
-        //        PreviousPageNumber = properties.PreviousPageNumber
-        //    };
-        //    response.Meta = metadata;
-        //    //Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
-
-        //    return Ok(response);
-        //}
+            var metadata = new Metadata
+            {
+                PageIndex = properties.PageIndex,
+                TotalPages = properties.TotalPages,
+                PageSize = properties.PageSize,
+                TotalRows = properties.TotalRows,
+                HasPreviousPage = properties.HasPreviousPage,
+                HasNextPage = properties.HasNextPage,
+                NextPageNumber = properties.NextPageNumber,
+                PreviousPageNumber = properties.PreviousPageNumber
+            };
+            response.Meta = metadata;
+            return Ok(response);
+        }
 
     }
 }

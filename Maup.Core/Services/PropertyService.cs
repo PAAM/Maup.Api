@@ -1,12 +1,9 @@
 ﻿using Maup.Core.Entities;
+using Maup.Core.Exceptions;
 using Maup.Core.Filters;
 using Maup.Core.Interfaces;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Maup.Core.Services
 {
@@ -85,9 +82,14 @@ namespace Maup.Core.Services
             return true;
         }
 
-        public async Task<bool> UpdatePropertyPrice(Property property)
+        public async Task<bool> UpdatePropertyPrice(int idProperty, JsonPatchDocument property)
         {
-            _unitOfWork.PropertyRepository.Update(property);
+            var exists = await GetProperty(idProperty);
+            if (exists == null)
+            {
+                throw new CustomException("Update property failed, please make sure property exists on database.");
+            }
+            property.ApplyTo(exists);
             await _unitOfWork.SaveChangesAsync();
             return true;
         }

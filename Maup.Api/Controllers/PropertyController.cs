@@ -5,6 +5,7 @@ using Maup.Core.Entities;
 using Maup.Core.Filters;
 using Maup.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Reflection.Metadata;
@@ -72,8 +73,6 @@ namespace Maup.Api.Controllers
                 PreviousPageNumber = properties.PreviousPageNumber
             };
             response.Meta = metadata;
-            //Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
-
             return Ok(response);
         }
 
@@ -95,24 +94,37 @@ namespace Maup.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
+
+        [HttpPut("{IdProperty}")]
+        [SwaggerOperation(
+             Summary = "[Summary]: Update the property",
+             Description = $"[Description]: This End-Point will update whole atributes of a property.",
+             OperationId = "UpdatePropertyPrice"
+             )]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(ApiResponse<bool>))]
         public async Task<IActionResult> UpdateProperty(PropertyDto propertyDto)
         {
             var property = _mapper.Map<Property>(propertyDto);
             await _propertyService.UpdateProperty(property);
-
-            return Ok(property);
+            propertyDto = _mapper.Map<PropertyDto>(property);
+            var response = new ApiResponse<PropertyDto>(propertyDto);
+            return Ok(response);
         }
 
-        //[HttpPut("{IdProperty}")]
-        //public async Task<IActionResult> UpdatePropertyPrice(int IdProperty, PropertyPriceDto propertyPriceDto)
-        //{
-        //    propertyPriceDto.IdProperty = IdProperty;
-        //    var property = _mapper.Map<Property>(propertyPriceDto);
-        //    var result = await _propertyService.UpdatePropertyPrice(property);
-        //    var response = new ApiResponse<bool>(result);
 
-        //    return Ok(response);
-        //}
+        [HttpPatch("{IdProperty}")]
+        [SwaggerOperation(
+            Summary = "[Summary]: Update the property's price",
+            Description = $"[Description]: This End-Point will update only the price using PATCH.",
+            OperationId = "UpdatePropertyPrice"
+            )]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(ApiResponse<bool>))]
+        public async Task<IActionResult> UpdatePropertyPrice([FromRoute] int idProperty, [FromBody] JsonPatchDocument property)
+        {
+            var result = await _propertyService.UpdatePropertyPrice(idProperty, property);
+            var response = new ApiResponse<bool>(result);
+
+            return Ok(response);
+        }
     }
 }
